@@ -34,9 +34,7 @@ scripts/
   generate-icons.js          Genera favicon.ico, apple-touch-icon.png y og-image.jpg desde los SVG fuente
 
 Dockerfile                   Build de la imagen de la app (multi-stage)
-Dockerfile.caddy             Build de la imagen de Caddy con el Caddyfile incluido
-docker-compose.yaml          Stack de despliegue: app + postgres + caddy
-Caddyfile                    Proxy inverso y SSL automático (Let's Encrypt)
+docker-compose.yaml          Stack de despliegue: app + postgres (Nginx nativo del VPS hace de proxy)
 ```
 
 ## Instalación
@@ -138,34 +136,42 @@ Revertir la última migración: `npm run migrate:down`.
 - `robots.txt` y `sitemap.xml`
 - Favicon (SVG + espacio para `.ico` y `apple-touch-icon`)
 
-## Despliegue en el VPS de Hostinger (Docker Compose)
+## Despliegue en el VPS de Hostinger (Docker Compose + Nginx nativo)
 
-El VPS (`srv1795969.hstgr.cloud`, Ubuntu 22.04) se administra por Hostinger como proyectos Docker
-Compose independientes: cada proyecto vive en su propio stack de contenedores, aislado de cualquier
-otro proyecto que ya exista en el mismo VPS. Este sitio se despliega como el proyecto `velmontgroup`,
-compuesto por tres contenedores:
+El VPS (`srv1795969.hstgr.cloud`, Ubuntu 22.04) ya aloja otro proyecto existente del mismo dueño
+(`cubitx.site` y subdominios) servido por un **Nginx nativo del sistema** (no en Docker), que ocupa
+los puertos 80 y 443. Por eso este sitio **no usa Caddy ni puertos 80/443 propios**: se despliega
+como el proyecto Docker Compose `velmontgroup` con solo dos contenedores —
 
-- `app` — la aplicación Node/Express (se construye con el `Dockerfile` del repo)
+- `app` — la aplicación Node/Express (se construye con el `Dockerfile` del repo), publicada únicamente
+  en `127.0.0.1:3000` del VPS (no accesible directo desde internet)
 - `postgres` — PostgreSQL 16, con los datos en un volumen Docker persistente
-- `caddy` — proxy inverso que además emite y renueva el certificado SSL (Let's Encrypt) automáticamente
 
-Archivos relevantes: `Dockerfile`, `docker-compose.yaml`, `Caddyfile`, `.dockerignore`.
+El Nginx nativo ya existente recibe el tráfico público de `velmontgroup.cl` y lo reenvía a
+`127.0.0.1:3000`, exactamente igual que hace con los demás sitios del VPS. El certificado SSL se
+emite con `certbot --nginx`, el mismo mecanismo que usan los otros dominios en este servidor.
+
+Archivos relevantes: `Dockerfile`, `docker-compose.yaml`, `.dockerignore`.
 
 Pasos:
 
 1. El proyecto debe estar en un repositorio Git (GitHub) accesible, para que la plataforma de
    Hostinger pueda clonarlo y construir la imagen.
-2. Apuntar el DNS del dominio `velmontgroup.cl` (registro `A` en `@` y `www`) a la IP del VPS
-   `177.7.33.4`, usando la API de DNS de Hostinger.
-3. Desplegar el proyecto Docker Compose en el VPS (`velmontgroup`), pasando las variables de entorno
+2. Apuntar el DNS del dominio `velmontgroup.cl` (registro `A`/`ALIAS` en `@` y `www`) a la IP del VPS
+   `177.7.33.4`, usando la API de DNS de Hostinger — sin tocar los registros de correo (MX, DKIM, SPF)
+   ya configurados para `contacto@velmontgroup.cl`.
+3. Desplegar el proyecto Docker Compose `velmontgroup` en el VPS, pasando las variables de entorno
    reales (las mismas de `.env`, incluyendo `POSTGRES_PASSWORD`) como configuración del proyecto —
    nunca se suben al repositorio.
-4. Verificar que los 3 contenedores estén corriendo y que `https://velmontgroup.cl` responda con
-   certificado válido (Caddy lo emite automáticamente al primer arranque, una vez el DNS ya resuelve
-   hacia el VPS).
+4. Agregar un **nuevo** archivo de sitio en Nginx (`/etc/nginx/sites-available/velmontgroup`, symlink
+   en `sites-enabled`) que haga `proxy_pass http://127.0.0.1:3000`, sin modificar ningún archivo de
+   los sitios existentes (`cubitx-web`, `cubitx-support-web`, etc.).
+5. Emitir el certificado: `certbot --nginx -d velmontgroup.cl -d www.velmontgroup.cl`.
+6. Verificar que `https://velmontgroup.cl` responda correctamente y que los otros sitios del VPS
+   sigan funcionando sin cambios.
 
 `app.set('trust proxy', 1)` ya está configurado en `server/src/app.js` para que el rate limiting y el
-registro de IP funcionen correctamente detrás de Caddy.
+registro de IP funcionen correctamente detrás de Nginx.
 
 Para actualizar el sitio más adelante (nuevo commit en el repo): volver a desplegar el proyecto
 Docker Compose para que reconstruya la imagen `app` con el código nuevo; `postgres` conserva sus

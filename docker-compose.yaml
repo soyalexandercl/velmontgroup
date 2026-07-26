@@ -3,6 +3,8 @@ services:
     build: .
     restart: unless-stopped
     env_file: .env
+    ports:
+      - "127.0.0.1:3000:3000"
     depends_on:
       - postgres
     networks:
@@ -20,26 +22,8 @@ services:
     networks:
       - internal
 
-  caddy:
-    build:
-      context: .
-      dockerfile: Dockerfile.caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - app
-    networks:
-      - internal
-
 networks:
   internal:
 
 volumes:
   postgres_data:
-  caddy_data:
-  caddy_config:
