@@ -34,6 +34,7 @@ scripts/
   generate-icons.js          Genera favicon.ico, apple-touch-icon.png y og-image.jpg desde los SVG fuente
 
 Dockerfile                   Build de la imagen de la app (multi-stage)
+Dockerfile.caddy             Build de la imagen de Caddy con el Caddyfile incluido
 docker-compose.yaml          Stack de despliegue: app + postgres + caddy
 Caddyfile                    Proxy inverso y SSL automático (Let's Encrypt)
 ```
