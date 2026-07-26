@@ -1,0 +1,61 @@
+[PROMPT DE DESARROLLO]
+
+Sigue las buenas prácticas definidas en instruction.md durante todo el
+desarrollo. Si existe algún conflicto entre este prompt e
+instruction.md, prioriza instruction.md salvo que aquí se indique
+explícitamente lo contrario.
+
+Quiero que desarrolles un proyecto web completamente profesional para mi
+empresa Velmont Group SpA, ubicada en Chile.
+
+La empresa está enfocada en licitaciones públicas y privadas. Su lema
+es:
+
+“Estrategia, suministros y resultados para tu empresa.”
+
+Objetivos: - Diseño moderno, sobrio, elegante y corporativo. - Inspirar
+confianza, profesionalismo y seguridad. - Colores principales: azul,
+dorado, blanco y grises. - Sitio One Page con desplazamiento suave entre
+secciones. - Sin inicio de sesión, registro ni panel administrativo.
+
+Secciones: 1. Hero 2. Quiénes Somos 3. Qué Hacemos 4. Contacto
+
+Formulario: - Nombre - Correo - Teléfono - Localidad
+
+Requisitos del formulario: - Validación frontend y backend. - Guardar
+los datos en base de datos. - La información no será pública. - Enviar
+un correo a velmontgroupspa@gmail.com usando SMTP desde
+contacto@velmontgroupspa.cl. - Toda la configuración SMTP debe estar en
+variables de entorno.
+
+Base de datos: Tabla de contactos con: - id - nombre - correo -
+teléfono - localidad - ip - user_agent - created_at
+
+Implementar: - Migraciones - Índices adecuados
+
+SEO: - Meta title - Meta description - Open Graph - Twitter Cards -
+robots.txt - sitemap.xml - favicon
+
+Seguridad: - Protección CSRF - Protección XSS - Protección SQL
+Injection - Sanitización - Rate limiting - Cabeceras HTTP de seguridad
+
+Rendimiento: - Lazy loading - Minificación - Optimización de imágenes -
+Alto rendimiento en Lighthouse
+
+Organización: public/ assets/ images/ logo/ icons/
+
+Indicar claramente dónde debo colocar el logo y las imágenes para que el
+sitio las utilice.
+
+Configuración: Usar archivo .env para todas las credenciales.
+
+Dominio: https://velmontgroupspa.cl
+
+Hosting: El proyecto se desplegará en un VPS de Hostinger. Debe
+instalarse en un directorio independiente. No modificar ningún otro
+proyecto existente.
+
+Entrega: - Proyecto completo. - Instrucciones de instalación. -
+Variables del .env. - Estructura de la base de datos. - Explicación para
+actualizar imágenes y contenido. - Código limpio, modular, documentado y
+mantenible.

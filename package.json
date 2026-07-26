@@ -1,0 +1,36 @@
+{
+  "name": "velmontgroup-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web corporativo de Velmont Group SpA",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prestart": "npm run build",
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "esbuild public/assets/css/main.css --bundle --minify --outfile=public/assets/dist/style.css",
+    "build:js": "esbuild public/assets/js/main.js --bundle --minify --format=iife --outfile=public/assets/dist/main.js",
+    "optimize:images": "node scripts/optimize-images.js",
+    "migrate": "node scripts/migrate.js up",
+    "migrate:down": "node scripts/migrate.js down"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "node-pg-migrate": "^6.2.2",
+    "nodemailer": "^9.0.3",
+    "pg": "^8.11.5",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "sharp": "^0.35.3"
+  }
+}

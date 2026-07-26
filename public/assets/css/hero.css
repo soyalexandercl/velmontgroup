@@ -1,0 +1,28 @@
+.hero {
+  padding: var(--space-9) 0;
+  background: linear-gradient(135deg, var(--color-navy-900), var(--color-blue-700) 60%, var(--color-blue-500));
+  color: var(--color-white);
+}
+
+.hero__inner {
+  max-width: 760px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gold-300);
+  margin-bottom: var(--space-4);
+}
+
+.hero h1 {
+  color: var(--color-white);
+}
+
+.hero__lead {
+  font-size: 1.1rem;
+  color: var(--color-gray-300);
+  max-width: 620px;
+}

@@ -1,0 +1,81 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.brand__logo {
+  height: 40px;
+  width: auto;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--color-navy-900);
+}
+
+.nav-menu {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--color-navy-900);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav-menu a:hover {
+  color: var(--color-gold-500);
+}
+
+@media (max-width: 720px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-gray-300);
+    transition: max-height var(--duration) ease;
+  }
+
+  .nav-menu.is-open {
+    max-height: 300px;
+  }
+
+  .nav-menu a {
+    padding: var(--space-4) var(--space-5);
+    border-top: 1px solid var(--color-gray-300);
+  }
+}

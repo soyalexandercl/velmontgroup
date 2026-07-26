@@ -1,0 +1,115 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-gray-900);
+  background: var(--color-white);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--color-navy-900);
+  line-height: 1.2;
+  margin: 0 0 var(--space-4);
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+h3 { font-size: 1.25rem; }
+
+p {
+  margin: 0 0 var(--space-4);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-white);
+  color: var(--color-navy-900);
+  padding: var(--space-3);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: var(--space-3);
+}
+
+.button {
+  display: inline-block;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+}
+
+.button--primary {
+  background: var(--color-gold-500);
+  color: var(--color-navy-900);
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.section {
+  padding: var(--space-9) 0;
+}
+
+.section--alt {
+  background: var(--color-gray-100);
+}
+
+.section__lead {
+  max-width: 640px;
+  color: var(--color-gray-600);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration) ease, transform var(--duration) ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}

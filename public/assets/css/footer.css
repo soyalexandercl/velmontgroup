@@ -1,0 +1,17 @@
+.site-footer {
+  background: var(--color-navy-900);
+  color: var(--color-gray-300);
+  padding: var(--space-6) 0;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
+}

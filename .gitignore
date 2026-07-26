@@ -1,0 +1,8 @@
+node_modules/
+.env
+public/assets/dist/
+public/assets/images/**/*.webp
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
