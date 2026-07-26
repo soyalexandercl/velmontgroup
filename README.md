@@ -104,14 +104,13 @@ Revertir la última migración: `npm run migrate:down`.
 
 ## Cómo actualizar imágenes y contenido
 
-- **Logo**: reemplaza `public/assets/images/logo/logo.svg` por el logo real (se incluyó un
-  placeholder de texto para que el sitio no se rompa mientras tanto). Si usas PNG, actualiza también
+- **Logo**: reemplaza `public/assets/images/logo/logo.svg` por el logo real (hoy hay un placeholder
+  de texto "Velmont" para que el sitio no se vea roto mientras tanto). Si usas PNG, actualiza también
   la ruta `src` en `public/index.html` (bloque `<a class="brand">`).
-- **Favicon**: coloca `favicon.ico` (32×32) en `public/` y un `favicon.svg` real en
-  `public/assets/images/icons/` (ya hay un placeholder). Agrega también
-  `apple-touch-icon.png` (180×180) en `public/assets/images/icons/`.
-- **Imagen para redes sociales (Open Graph / Twitter)**: coloca `og-image.jpg` (1200×630) en
-  `public/assets/images/logo/`.
+- **Favicon / apple-touch-icon / imagen Open Graph**: `favicon.ico`, `icons/apple-touch-icon.png` y
+  `logo/og-image.jpg` ya están generados automáticamente a partir de `icons/favicon.svg` y
+  `logo/og-image-source.svg` (marca de placeholder). Para regenerarlos después de cambiar el diseño:
+  edita esos dos SVG y corre `node scripts/generate-icons.js`.
 - **Fotos generales**: colócalas directamente en `public/assets/images/` (formato JPG o PNG) y corre
   `npm run optimize:images` para generar automáticamente versiones WebP responsivas (480/768/1280/1920px).
   Luego referencia esas imágenes en `public/index.html` con `<img loading="lazy">`.
