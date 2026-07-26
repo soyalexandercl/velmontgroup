@@ -2,7 +2,7 @@
   "name": "velmontgroup-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Sitio web corporativo de Velmont Group SpA",
+  "description": "Sitio web corporativo de Velmont Group",
   "engines": {
     "node": ">=18"
   },

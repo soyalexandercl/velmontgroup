@@ -6,7 +6,7 @@ instruction.md, prioriza instruction.md salvo que aquí se indique
 explícitamente lo contrario.
 
 Quiero que desarrolles un proyecto web completamente profesional para mi
-empresa Velmont Group SpA, ubicada en Chile.
+empresa Velmont Group, ubicada en Chile.
 
 La empresa está enfocada en licitaciones públicas y privadas. Su lema
 es:

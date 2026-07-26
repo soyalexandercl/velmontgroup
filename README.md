@@ -1,6 +1,6 @@
-# Velmont Group SpA — Sitio web corporativo
+# Velmont Group — Sitio web corporativo
 
-Sitio one-page para Velmont Group SpA (licitaciones públicas y privadas en Chile), con formulario
+Sitio one-page para Velmont Group (licitaciones públicas y privadas en Chile), con formulario
 de contacto que guarda los datos en PostgreSQL y notifica por correo vía SMTP.
 
 ## Estructura del proyecto

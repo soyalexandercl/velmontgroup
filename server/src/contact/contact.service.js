@@ -22,7 +22,7 @@ async function registerContact(input, requestMeta) {
   });
 
   try {
-    await sendContactNotification({ ...data, createdAt: saved.created_at });
+    await sendContactNotification(data);
   } catch (error) {
     console.error('Error enviando notificacion de contacto:', error.message);
   }
