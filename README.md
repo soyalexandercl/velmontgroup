@@ -144,11 +144,11 @@ los puertos 80 y 443. Por eso este sitio **no usa Caddy ni puertos 80/443 propio
 como el proyecto Docker Compose `velmontgroup` con solo dos contenedores —
 
 - `app` — la aplicación Node/Express (se construye con el `Dockerfile` del repo), publicada únicamente
-  en `127.0.0.1:3000` del VPS (no accesible directo desde internet)
+  en `127.0.0.1:3010` del VPS (no accesible directo desde internet)
 - `postgres` — PostgreSQL 16, con los datos en un volumen Docker persistente
 
 El Nginx nativo ya existente recibe el tráfico público de `velmontgroup.cl` y lo reenvía a
-`127.0.0.1:3000`, exactamente igual que hace con los demás sitios del VPS. El certificado SSL se
+`127.0.0.1:3010`, exactamente igual que hace con los demás sitios del VPS. El certificado SSL se
 emite con `certbot --nginx`, el mismo mecanismo que usan los otros dominios en este servidor.
 
 Archivos relevantes: `Dockerfile`, `docker-compose.yaml`, `.dockerignore`.
@@ -164,7 +164,7 @@ Pasos:
    reales (las mismas de `.env`, incluyendo `POSTGRES_PASSWORD`) como configuración del proyecto —
    nunca se suben al repositorio.
 4. Agregar un **nuevo** archivo de sitio en Nginx (`/etc/nginx/sites-available/velmontgroup`, symlink
-   en `sites-enabled`) que haga `proxy_pass http://127.0.0.1:3000`, sin modificar ningún archivo de
+   en `sites-enabled`) que haga `proxy_pass http://127.0.0.1:3010`, sin modificar ningún archivo de
    los sitios existentes (`cubitx-web`, `cubitx-support-web`, etc.).
 5. Emitir el certificado: `certbot --nginx -d velmontgroup.cl -d www.velmontgroup.cl`.
 6. Verificar que `https://velmontgroup.cl` responda correctamente y que los otros sitios del VPS
