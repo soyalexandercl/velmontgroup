@@ -89,6 +89,7 @@ Tabla `contacts` (creada por la migración en `server/src/migrations/`):
 | `email` | `varchar(255)` | índice |
 | `phone` | `varchar(30)` | |
 | `locality` | `varchar(150)` | |
+| `message` | `text` | |
 | `ip_address` | `varchar(45)` | |
 | `user_agent` | `text` | |
 | `created_at` | `timestamptz` | índice, default `now()` |
@@ -97,7 +98,7 @@ Los datos **no son públicos**: no hay panel de administración ni endpoint de l
 conéctate directamente a la base con `psql` o pgAdmin:
 
 ```sql
-SELECT id, name, email, phone, locality, created_at FROM contacts ORDER BY created_at DESC;
+SELECT id, name, email, phone, locality, message, created_at FROM contacts ORDER BY created_at DESC;
 ```
 
 Revertir la última migración: `npm run migrate:down`.
@@ -124,7 +125,7 @@ Revertir la última migración: `npm run migrate:down`.
 - Cabeceras HTTP de seguridad y CSP restrictiva (`helmet`)
 - Protección CSRF (patrón double-submit cookie, endpoint `GET /api/csrf-token`)
 - Rate limiting en `POST /api/contact`
-- Validación y sanitización en frontend y backend (nombre, correo, teléfono, localidad)
+- Validación y sanitización en frontend y backend (nombre, correo, teléfono, localidad, mensaje)
 - Consultas SQL siempre parametrizadas (sin concatenación de strings)
 - Credenciales solo en variables de entorno, nunca en el código
 

@@ -17,7 +17,8 @@
   color: var(--color-navy-900);
 }
 
-.form-field input {
+.form-field input,
+.form-field textarea {
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--color-gray-300);
   border-radius: var(--radius);
@@ -26,12 +27,19 @@
   transition: border-color var(--duration) ease;
 }
 
-.form-field input:focus {
+.form-field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
   outline: none;
   border-color: var(--color-blue-500);
 }
 
-.form-field input.is-invalid {
+.form-field input.is-invalid,
+.form-field textarea.is-invalid {
   border-color: var(--color-danger);
 }
 

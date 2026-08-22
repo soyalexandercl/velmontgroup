@@ -19,6 +19,9 @@ function validateField(name, value) {
   if (name === 'locality' && (trimmed.length < 2 || trimmed.length > 150)) {
     return 'Ingresa una localidad valida (2 a 150 caracteres).';
   }
+  if (name === 'message' && (trimmed.length < 10 || trimmed.length > 2000)) {
+    return 'Ingresa un mensaje valido (10 a 2000 caracteres).';
+  }
   return null;
 }
 
@@ -53,7 +56,7 @@ function validateForm(form) {
   const payload = {};
   let hasErrors = false;
 
-  form.querySelectorAll('input').forEach((field) => {
+  form.querySelectorAll('input, textarea').forEach((field) => {
     const value = formData.get(field.name) || '';
     payload[field.name] = value;
 
@@ -91,7 +94,7 @@ export function initContactForm() {
   const statusElement = form.querySelector('.form-status');
   const submitButton = form.querySelector('button[type="submit"]');
 
-  form.querySelectorAll('input').forEach((field) => {
+  form.querySelectorAll('input, textarea').forEach((field) => {
     field.addEventListener('input', () => clearFieldError(field));
     field.addEventListener('focus', () => clearFieldError(field));
   });

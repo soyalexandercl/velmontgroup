@@ -13,6 +13,7 @@ function validateContact(input = {}) {
   const email = validator.trim(String(input.email || ''));
   const phone = validator.trim(String(input.phone || '')).replace(/[\s-]/g, '');
   const locality = validator.trim(String(input.locality || ''));
+  const message = validator.trim(String(input.message || ''));
 
   if (!NAME_REGEX.test(name)) {
     errors.name = 'Ingresa un nombre valido (solo letras, 2 a 150 caracteres).';
@@ -30,11 +31,16 @@ function validateContact(input = {}) {
     errors.locality = 'Ingresa una localidad valida (2 a 150 caracteres).';
   }
 
+  if (message.length < 10 || message.length > 2000) {
+    errors.message = 'Ingresa un mensaje valido (10 a 2000 caracteres).';
+  }
+
   const data = {
     name: validator.escape(name),
     email: validator.normalizeEmail(email) || validator.escape(email),
     phone: validator.escape(phone),
     locality: validator.escape(locality),
+    message: validator.escape(message),
   };
 
   return { isValid: Object.keys(errors).length === 0, errors, data };
