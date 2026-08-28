@@ -1,27 +1,7 @@
 const FORM_ID = 'contact-form';
-const NAME_REGEX = /^[a-zA-ZÀ-ÿ\s]{2,150}$/;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_REGEX = /^\+?\d{8,15}$/;
 
-// Valida un campo individual. Devuelve el mensaje de error o null si es valido.
-function validateField(name, value) {
-  const trimmed = value.trim();
-
-  if (name === 'name' && !NAME_REGEX.test(trimmed)) {
-    return 'Ingresa un nombre valido (solo letras, 2 a 150 caracteres).';
-  }
-  if (name === 'email' && !EMAIL_REGEX.test(trimmed)) {
-    return 'Ingresa un correo electronico valido.';
-  }
-  if (name === 'phone' && !PHONE_REGEX.test(trimmed.replace(/[\s-]/g, ''))) {
-    return 'Ingresa un telefono valido (8 a 15 digitos).';
-  }
-  if (name === 'locality' && (trimmed.length < 2 || trimmed.length > 150)) {
-    return 'Ingresa una localidad valida (2 a 150 caracteres).';
-  }
-  if (name === 'message' && (trimmed.length < 10 || trimmed.length > 2000)) {
-    return 'Ingresa un mensaje valido (10 a 2000 caracteres).';
-  }
+// Sin restricciones de formato ni longitud: cualquier valor es valido.
+function validateField() {
   return null;
 }
 
