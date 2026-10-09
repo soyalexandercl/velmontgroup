@@ -2,11 +2,6 @@ require('dotenv').config();
 
 const REQUIRED_VARS = [
   'DATABASE_URL',
-  'SMTP_HOST',
-  'SMTP_PORT',
-  'SMTP_USER',
-  'SMTP_PASS',
-  'SMTP_FROM',
   'CONTACT_EMAIL_TO',
 ];
 

@@ -1,7 +1,7 @@
 # Velmont Group — Sitio web corporativo
 
 Sitio one-page para Velmont Group (licitaciones públicas y privadas en Chile), con formulario
-de contacto que guarda los datos en PostgreSQL y notifica por correo vía SMTP.
+de contacto que guarda los datos en PostgreSQL y notifica por correo vía FormSubmit.
 
 ## Estructura del proyecto
 
@@ -23,7 +23,7 @@ server/
   server.js                 Punto de entrada
   src/
     app.js                  Configuración de Express (middlewares, rutas)
-    config/                 env, base de datos, SMTP
+    config/                 env, base de datos, correo
     middleware/              seguridad, CSRF, manejo de errores
     contact/                 dominio de contacto (routes → service → repository)
     migrations/               migraciones de base de datos
@@ -39,7 +39,7 @@ docker-compose.yaml          Stack de despliegue: app + postgres (Nginx nativo d
 
 ## Instalación
 
-Requisitos: Node.js 18+, PostgreSQL 14+, una cuenta SMTP para `contacto@velmontgroup.cl`.
+Requisitos: Node.js 18+, PostgreSQL 14+, acceso a la bandeja de `velmontgroupspa@gmail.com` (para confirmar FormSubmit la primera vez).
 
 ```bash
 npm install
@@ -70,9 +70,6 @@ npm start                    # levanta el servidor (por defecto puerto 3000)
 | `PORT` | Puerto interno del proceso Node (Nginx hace de proxy hacia él) |
 | `APP_URL` | `https://velmontgroup.cl` |
 | `DATABASE_URL` | Cadena de conexión PostgreSQL: `postgres://usuario:password@host:5432/velmontgroup` |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE` | Datos del servidor SMTP |
-| `SMTP_USER`, `SMTP_PASS` | Credenciales de `contacto@velmontgroup.cl` |
-| `SMTP_FROM` | Remitente que verán los destinatarios |
 | `CONTACT_EMAIL_TO` | `velmontgroupspa@gmail.com` |
 | `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX` | Límite de envíos del formulario por IP |
 
